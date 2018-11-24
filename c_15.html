@@ -1,0 +1,629 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=EUC-JP">
+<META http-equiv="Content-Style-Type" content="text/css">
+<TITLE></TITLE>
+<LINK rel="stylesheet" href="c.css" type="text/css">
+</HEAD>
+<BODY bgcolor="#000000" text="#ffffff" link="#ffff00" vlink="#00ff00" alink="#00ffff"><!-- geoguide start --><div align=center><script language="javascript">var jps=382116062;var jpt=1543068287</script><script language="javascript" src="//bc-geocities.yahoo.co.jp/js/gg.js"></script></div><!-- geoguide end -->
+<P align="center"><B><FONT size="+2">15. 関数の構築法と論理演算子</FONT></B></P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><B>1. 複数の条件判断</B><BR>
+<BR>
+　二つの数値があります。最初の数値が 'K' で、尚且つ二つ目の数値が 'M' の判定をします。判定結果は二つとも成立すれば真、そうでなければ偽とする関数を作ります。<BR>
+　関数設計法の例を示します。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10" class="TDline">
+    <TBODY>
+        <TR>
+            <TH>関数名</TH>
+            <TD>　</TD>
+        </TR>
+        <TR>
+            <TH>引数</TH>
+            <TD>　　</TD>
+        </TR>
+        <TR>
+            <TH>返し値</TH>
+            <TD>　</TD>
+        </TR>
+        <TR>
+            <TH>関数の機能</TH>
+            <TD>ある二つの数値 a 及び b がある。<BR>
+            a&nbsp;が 'K' であり、尚且つ&nbsp;b&nbsp;が 'M' である事を判定する。<BR>
+            条件が成立すれば真、不成立なら偽を返す。</TD>
+        </TR>
+        <TR>
+            <TH>プロトタイプ</TH>
+            <TD>　</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　この様な表を用意し最初に関数の機能を記入します。そしてその機能を実現する為の事柄、つまり空欄になっている部分を検討します。<BR>
+　関数の引数は二つ必要です。文字定数を判断するので引数の型は int ですね。<BR>
+　返し値は真か偽です。ここでは返し値の型を int にし、偽であれば 0 を、そうでなければ
+0 ではない値を返します。<BR>
+　関数名は is_k_and_m としましょう。<BR>
+　関数の設計は出来ましたから先の表を埋めます。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10" class="TDline">
+    <TBODY>
+        <TR>
+            <TH>関数名</TH>
+            <TD>is_k_and_m</TD>
+        </TR>
+        <TR>
+            <TH>引数</TH>
+            <TD>第一引数 int a<BR>
+            第二引数 int b</TD>
+        </TR>
+        <TR>
+            <TH>返し値</TH>
+            <TD>偽ならば 0<BR>
+            真ならば 0 ではない値</TD>
+        </TR>
+        <TR>
+            <TH>関数の機能</TH>
+            <TD>ある二つの数値 a 及び b がある。<BR>
+            a&nbsp;が 'K' であり、尚且つ&nbsp;b&nbsp;が 'M' である事を判定する。<BR>
+            条件が成立すれば真、不成立なら偽を返す。</TD>
+        </TR>
+        <TR>
+            <TH>プロトタイプ</TH>
+            <TD>int is_k_and_m( int a, int b );</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　これでプログラムを開始してはいけません。まだするべき事が残っています。それは関数が正しく動作する事を確認する方法です。<BR>
+　こんな事を考えます。ある授業の課題で木製の椅子を作る事になりました。椅子の構造は授業で習ったのでその通りに材料を加工して組み上げるだけです。とんとん拍子に組み立て課題提出日より一週間も早く完成しました。課題提出日、自信を持ってその椅子を提出します。教師はおもむろに椅子に手を乗せ体重をかけ始めると椅子は崩れ去ってしまいました。当然再提出を課せられます。<BR>
+　問題は椅子を作った後それが椅子として機能する事を確認しなかった事にあります。確認していれば問題点を発見し改善出来たでしょう。<BR>
+　プログラムをする時も全く同じです。きちんと機能するか否かを確認しなければいけません。貴方はバグだらけのプログラムを使いたいとは思わないはずですし他の誰もがそうでしょう。プログラムが正しく動作する、条件に合った動きをする、それが当たり前でありそうでなければプログラムとは呼べません。<BR>
+　ではこれから作成するプログラムの動作を確認する方法を考えます。まずは関数の動作の再確認。
+a が 'K' であり尚且つ b が 'M' である事を判断しその真偽を返しすものです。ならば何を確認すれば良いのでしょう。<BR>
+　真っ先に思い付くのが「 a が 'K' であり尚且つ b が 'M' の時に真を返す」だと思います。他にもまだ残っています。「
+a が 'K' ではなく尚且つ b が 'M' の時に偽を返す」事も必要です。他にもありますがこの様に考えていくと確認すべき条件は次の表の様になります。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10">
+    <TBODY>
+        <TR>
+            <TH>a の値</TH>
+            <TH>b の値</TH>
+            <TH>返し値</TH>
+        </TR>
+        <TR>
+            <TD>'K'</TD>
+            <TD>'M'</TD>
+            <TD>真</TD>
+        </TR>
+        <TR>
+            <TD>'K'</TD>
+            <TD>'M' ではない</TD>
+            <TD>偽</TD>
+        </TR>
+        <TR>
+            <TD>'K' ではない</TD>
+            <TD>'M'</TD>
+            <TD>偽</TD>
+        </TR>
+        <TR>
+            <TD>'K' ではない</TD>
+            <TD>'M' ではない</TD>
+            <TD>偽</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　数学の組み合わせで考えてください。<BR>
+　この確認法の機能を main 関数に盛り込みプログラムを作ってください。<BR>
+　これまでより組み方に個々人の差が出るでしょう。ですから以下のプログラムは参考程度にしかなりません。結果も続けて挙げます。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD class="Program">
+            <PRE class="Pad">/* 15_00.c
+        二つの値が順に 'K' 'M' である事を確認する関数、
+        及びその動作確認をするプログラム                */
+#include &lt;stdio.h&gt;
+
+/* プロトタイプ宣言 */
+int is_k_and_m( int a, int b );
+
+int main( void )
+{
+        int c0;
+        int c1;
+        int nc;
+        int boolean;
+
+        c0 = 'K';
+        c1 = 'M';
+        nc = 'A';
+
+        boolean = is_k_and_m( c0, c1 );
+        printf( &quot;%c, %c : 結果は %d\n&quot;, c0, c1, boolean );
+
+        boolean = is_k_and_m( c0, nc );
+        printf( &quot;%c, %c : 結果は %d\n&quot;, c0, nc, boolean );
+
+        boolean = is_k_and_m( nc, c1 );
+        printf( &quot;%c, %c : 結果は %d\n&quot;, nc, c1, boolean );
+
+        boolean = is_k_and_m( nc, nc );
+        printf( &quot;%c, %c : 結果は %d\n&quot;, nc, nc, boolean );
+
+        return ( 0 );
+}
+
+/**********************************************************
+        int is_k_and_m(
+        [in ]   int a,          // 比較値一
+        [in ]   int b           // 比較値二
+        );
+        返し値
+                偽 : 0
+                真 : 0 ではない値
+        処理詳細
+                a が 'K' で、且つ b が 'M' かを判断し、
+                その真偽を値で返す。
+**********************************************************/
+int is_k_and_m( int a, int b )
+{
+        int false;      // 偽の時の返し値
+        int true;       // 真     〃     
+
+        false = 0;
+        true  = 1;
+
+        if ( a == 'K' )
+        {
+                if ( b == 'M' )
+                {
+                        return ( true );
+                }
+        }
+        return ( false );
+}</PRE>
+            </TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10">
+    <TBODY>
+        <TR>
+            <TD class="TDline">
+            <PRE>K, M : 結果は 1
+K, A : 結果は 0
+A, M : 結果は 0
+A, A : 結果は 0</PRE>
+            </TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　is_k_and_m 関数の説明です。最初に戻り値を変数に定義しています。その後
+if 文を入れ子にして判断します。b == 'M' が成立するには a == 'K' が成立していなければなりません。即ち
+a == 'K' 且つ b == 'M' の時のみ return ( true ); 文が実行されます。この様に
+if 文中から return 命令で関数を抜ける事も可能です。return 命令は goto 命令と大差なく思える事でしょう。むやみに
+return 命令を記述するとプログラムそのものが分かり難くなります。<BR>
+　最後の return ( false ); 文は、以上の条件が満たされない時に実行されます。即ち
+a が 'K' ではない、又は b が 'M' ではない時です。<BR>
+　以上で is_k_and_m の関数は終了します。実行結果をご覧ください。結果が
+0 即ち偽になっているのは、一方の文字定数が偽である時です。結果が 0 では無い、即ち真になっているのは二つの値共に真である時です。<BR>
+　この結果から is_k_and_m 関数は正しく動作している事が証明されました。誰がこの関数を使おうとも安心です。<BR>
+<BR>
+　main 関数を見てみます。<BR>
+　is_k_and_m 関数を呼び出し printf 関数を実行する、これが四回続けて行われています。敢えてこの様な方法を採る場合も無い事も無いのですが、今回はみっともない以外の何物でもありません。まだ説明していない機能を用いると簡単に済みますがそれは反則というもの。<BR>
+　ここは多少見栄えの良い方法に変更しましょう。この二行を関数化してしまうのです。<BR>
+　これまでの様に関数設計を行ってから作成を始めます。しかしその作業は紙面では省略します。実際にはきちんと設計してから行っているので誤解しないでください。<BR>
+　プロトタイプ宣言は void check_func( int a, int b ); とします。そしてこの関数の二つの引数をそのまま
+is_k_and_m 関数に渡し、その後の処理はこれまでと同じです。<BR>
+　以下そのプログラムです。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD class="Program">
+            <PRE class="Pad">/* 15_01.c
+        二つの値が順に 'K' 'M' である事を確認する関数、
+        及びその動作確認をするプログラム
+        15_00.c の main 関数の冗長さを少なくする        */
+#include &lt;stdio.h&gt;
+
+/* プロトタイプ宣言 */
+int  is_k_and_m( int a, int b );
+void check_func( int a, int b );
+
+int main( void )
+{
+        int c0;
+        int c1;
+        int nc;
+
+        c0 = 'K';
+        c1 = 'M';
+        nc = 'A';
+
+        check_func( c0, c1 );
+        check_func( c0, nc );
+        check_func( nc, c1 );
+        check_func( nc, nc );
+
+        return ( 0 );
+}
+
+/**********************************************************
+        void check_func(
+        [in ]   int a,          // 比較値一
+        [in ]   int b           // 比較値二
+        );
+        返し値
+                無し
+        処理詳細
+                二つの引数をそのまま is_k_and_m 関数に渡す。
+                二つの引数の文字を表示し、
+                is_k_and_m 関数の戻り値も合わせて表示する。
+**********************************************************/
+void check_func( int a, int b )
+{
+        int boolean;
+
+        boolean = is_k_and_m( a, b );
+        printf( &quot;%c, %c : 結果は %d\n&quot;, a, b, boolean );
+
+        return;
+}
+
+/**********************************************************
+        int is_k_and_m(
+        [in ]   int a,          // 比較値一
+        [in ]   int b           // 比較値二
+        );
+        返し値
+                偽 : 0
+                真 : 0 ではない値
+        処理詳細
+                a が 'K' で、且つ b が 'M' かを判断し、
+                その真偽を値で返す。
+**********************************************************/
+int is_k_and_m( int a, int b )
+{
+        int false;      // 偽の時の返し値
+        int true;       // 真     〃     
+
+        false = 0;
+        true  = 1;
+
+        if ( a == 'K' )
+        {
+                if ( b == 'M' )
+                {
+                        return ( true );
+                }
+        }
+        return ( false );
+}</PRE>
+            </TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　is_k_and_m 関数は変更していません。main 関数が随分すっきりしました。<BR>
+　check_func 関数については注釈の処理しか行っていませんので二点だけ説明します。<BR>
+　一つ目。この関数の返し値は void 型なのでありません。故に return 文も単独で使用し、返し値を指定していません。<BR>
+　二つ目。この関数から別の関数を呼んでいます。 main 関数からこの関数を呼び出した時の処理の流れは
+main → check_func → is_k_and_m → check_func → main となっています。正確には
+is_k_and_m 関数の後に printf 関数を呼び出しています。<BR>
+　だんだん C 言語らしいプログラムになってきました。<BR>
+<BR>
+　二つの値が 'K' か 'M' である事は条件に明示しました。ここにそれぞれの値の確立が決まっていたら貴方はどうしますか。例えば第一引数が
+'K' である確立は 99% 、二つ目の引数が 'M' である確立は 1% とします。先のプログラムはこのままで良いでしょうか。それとも何か変更が必要でしょうか。<BR>
+　この様な条件の場合、先のプログラム、 is_k_and_m 関数は非常に問題のある組み方であるといえます。なぜなら先に最初の引数が
+'K' である事を確認しているからです。<BR>
+　第一引数が 'K' である確立は 99% 、殆どの場合条件は成立します。第二引数が
+'M' である確立は 1%、 殆ど成立しません。であるのに最初に第一引数を判断するのは無駄です。どちらか片方が成立しなければこの関数は偽です。第二引数を最初に判断すれば
+99% の確立で条件不成立となり、その時点でこの関数は偽を返す事になります。第一引数を確認する確立は
+1% となって判断する回数が減り、処理効率が向上します。<BR>
+　この様に複数の条件を判断する場合、その条件の成立確立がある程度決まっているのならそれを考慮した組み方をしなければなりません。成立確立の偏った条件というのは現実に多々あります。<BR>
+　考慮していなかったプログラムでは「従来一時間掛かっており、この条件判断の順番を変えただけで処理時間が四十分になった」等という事も起こり得ます。各条件判断の後に更に多くの関数を呼び出すような処理では不思議な事ではありません。</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><B>2. 複数の条件判断の別の記法</B><BR>
+<BR>
+　先のプログラムでは条件判断ごとに個別の処理を行っていません。こう云った場合は条件をまとめて記述出来ます。その記述に用いるのが<B><FONT size="+1">論理演算子</FONT></B>で、次の二種類の二項演算子があります。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10">
+    <TBODY>
+        <TR>
+            <TH><FONT size="+1"><B>論理積演算子</B></FONT><BR>
+            (logical AND operator)</TH>
+            <TD align="center"><FONT size="+1"><B>&amp;&amp;</B></FONT></TD>
+        </TR>
+        <TR>
+            <TH><FONT size="+1"><B>論理和演算子</B></FONT><BR>
+            (logical OR operator)</TH>
+            <TD align="center"><FONT size="+1"><B>||</B></FONT></TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　論理積は<B><FONT size="+1">且つ</FONT></B>、論理和は<B><FONT size="+1">又は</FONT></B>です。<BR>
+　論理演算子を用いて先の is_k_and_m 関数を変更し、その本体だけを以下に示します。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD class="Program">
+            <PRE class="Pad">int is_k_and_m( int a, int b )
+{
+        int false;      // 偽の時の返し値
+        int true;       // 真     〃     
+
+        false = 0;
+        true  = 1;
+
+        if ( ( a == 'K' ) &amp;&amp; ( b == 'M' ) )
+        {
+                return ( true );
+        }
+        return ( false );
+}</PRE>
+            </TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>(A) &amp;&amp; (B) とすると、Aが真で且つBが真と云う意味になります。今の例では
+( a == 'K' ) が真、且つ ( b == 'M' ) が真ならば、条件が成立し、return (
+true ); が実行されます。<BR>
+　内部では二つの if 文に分解されて処理されます。即ち<B><FONT size="+1">論理演算子を用いない記述と意味も動作も全く同じ</FONT></B>となります。となれば最初の条件が不成立なら以後の条件判断はなされず条件判断は偽となります。条件判断の順番には気を配りましょう。<BR>
+　ここで問題です。今の関数の論理演算子を論理積から論理和に変更したら動作はどの様になるでしょうか。<BR>
+　答えは次の表です。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10">
+    <TBODY>
+        <TR>
+            <TH>a の値</TH>
+            <TH>b の値</TH>
+            <TH>返し値</TH>
+        </TR>
+        <TR>
+            <TD>'K'</TD>
+            <TD>'M'</TD>
+            <TD>真</TD>
+        </TR>
+        <TR>
+            <TD>'K'</TD>
+            <TD>'M' ではない</TD>
+            <TD>真</TD>
+        </TR>
+        <TR>
+            <TD>'K' ではない</TD>
+            <TD>'M'</TD>
+            <TD>真</TD>
+        </TR>
+        <TR>
+            <TD>'K' ではない</TD>
+            <TD>'M' ではない</TD>
+            <TD>偽</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>どちらか一方の条件が真なら、その条件判断は真となります。即ち偽になるのは両者共に偽の時だけです。15_00.c
+を変更して確認してみると良いでしょう。<BR>
+　更に問題です。論理演算子を用いて判断せず、二つの if 文によって論理和演算子を用いた時と同じ動作をするよう
+is_k_and_m 関数を変更してください。条件判断の演算子には == を使用してください。<BR>
+　答えの一つが以下です。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD class="Program">
+            <PRE class="Pad">int is_k_and_m( int a, int b )
+{
+        int false;      // 偽の時の返し値
+        int true;       // 真     〃     
+
+        false = 0;
+        true  = 1;
+
+        if ( a == 'K' )
+        {
+                return ( true );
+        }
+
+        if ( b == 'M' )
+        {
+                return ( true );
+        }
+
+        return ( false );
+}</PRE>
+            </TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　これを見れば論理和演算子の動作も理解し易いと思います。どちらかが成立すれば真、どちらも成立しなければ偽となります。</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><B>3. 否定演算子</B><BR>
+<BR>
+　<B><FONT size="+1">否定演算子 (logical negation operator) とは条件式の真偽を逆にする</FONT></B>もので、<B><FONT size="+1">! (エクスクラメーション・マーク)</FONT></B> を用います。真なら偽、偽なら真になります。他とは違い単項演算子です。<BR>
+</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10">
+    <TBODY>
+        <TR>
+            <TH><FONT size="+1">否定演算子</FONT><BR>
+            <B><FONT size="+1">(logical negation operator)</FONT></B></TH>
+            <TH><FONT size="+1">!</FONT></TH>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P>例を挙げます。</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE border="1" cellpadding="10">
+    <TBODY>
+        <TR>
+            <TH>条件式</TH>
+            <TH>否定演算子を用いて<BR>
+            同一となる条件式</TH>
+        </TR>
+        <TR>
+            <TD>a == 10</TD>
+            <TD>!( a != 10 )</TD>
+        </TR>
+        <TR>
+            <TD>a != 10</TD>
+            <TD>!( a == 10 )</TD>
+        </TR>
+        <TR>
+            <TD>a &lt; 10</TD>
+            <TD>!( a &gt;= 10 )</TD>
+        </TR>
+        <TR>
+            <TD>a &gt; 10</TD>
+            <TD>!( a &lt;= 10 )</TD>
+        </TR>
+        <TR>
+            <TD>a &lt;= 10</TD>
+            <TD>!( a &gt; 10 )</TD>
+        </TR>
+        <TR>
+            <TD>a &gt;= 10</TD>
+            <TD>!( a &lt; 10 )</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+<P>　!( A ) との記述は A ではない、と読み解けば簡単だと思います。<BR>
+　C 言語では if ( a ) とすると、a が 0 なら偽、 0 でなければ真となると以前説明しました。これを利用して
+if ( !a ) とする記述も見られます。即ち a が 0 なら真、 0 でなければ偽となります。この記述をする方も少なくありませんので覚えておいて損はありません。<BR>
+　先のプログラムでこれを利用すると if ( is_k_and_m( a, b ) ) と云った記述も可能です。is_k_and_m
+関数が 0 を返せば偽、 0 でない値を返せば真となります。また if ( !( is_k_and_m(
+a, b ) ) と記述すれば真偽が逆になります。関数前後の括弧は演算子の優先順位上省略可能なので
+if ( !is_k_and_m( a, b ) ) とも記述出来ます。</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><B>4. より多くの条件に対応</B><BR>
+<BR>
+　以上の演算子は複数の記述が可能です。A 且つ B 且つ C ならば、( (A) &amp;&amp;
+(B) &amp;&amp; (C)&nbsp;) ですし、( A 且つ B ) 又は ( C 且つ D ) なら (
+( (A) &amp;&amp; (B) ) || ( (C) &amp;&amp; (D) ) ) となります。<BR>
+　注意点があります。条件判断は左から順に行われます。よって途中で条件判断が打ち切られそれ以降の条件判断を行わない場合があります。<BR>
+　( (A) &amp;&amp; (B) &amp;&amp; (C) ) なら、どれか一つでも偽になると条件判断全体は偽です。(B)
+が偽ならば (C) を判断するまでも無く条件判断全体は偽になるので、(C) の判断は飛ばされます。<BR>
+　( (A) || (B) || (C) ) なら、どれか一つが真になると条件判断全体は真です。(A)
+が真ならば、(B) や (C) を判断するまでも無く条件判断全体が真になるので、(B)
+及び (C) の条件判断は飛ばされます。<BR>
+<BR>
+　条件判断はあくまでも分かり易く記述し、難解になるようなら複数の if 文に分けるのが良いでしょう。</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><B>5. 論理演算子の活用</B><BR>
+<BR>
+　論理演算子は条件判断で頻繁に用いられます。条件判断は繰り返し命令でも使用されます。勿論これらの条件式に使用可能です。while
+( ( i &lt; 10 ) &amp;&amp; ( c != '\0' ) ) といった感じになります。</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P align="center"><B><FONT size="+1"><A href="c_index.html">戻る</A></FONT></B></P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<P><BR>
+</P>
+<CENTER>
+<TABLE>
+    <TBODY>
+        <TR>
+            <TD>Copyright (C) 2008 くろにし かきてる</TD>
+        </TR>
+    </TBODY>
+</TABLE>
+</CENTER>
+<P><BR>
+</P>
+</BODY>
+</HTML><!-- text below generated by geocities.jp --></object></layer></div></span></style></noscript></table></script></applet><script language="javascript" src="//bc-geocities.yahoo.co.jp/js/geov2.js"></script><script language="javascript">geovisit();</script>
